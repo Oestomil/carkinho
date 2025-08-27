@@ -277,6 +277,18 @@ export default function App() {
         </section>
       </main>
 
+      {/* Mobil alt çubuk (≤768px görünür) */}
+      <div className="mobile-cta">
+        <button className="btn-cta" onClick={spin} disabled={!canSpin}>
+          Çevir
+        </button>
+        {winnerName && (
+          <button className="secondary" onClick={repeat}>
+            Tekrarla
+          </button>
+        )}
+      </div>
+
       <footer className="footer">
         <span>
           © {new Date().getFullYear()} Carkinho —{" "}

@@ -64,13 +64,13 @@ export default function Wheel({
   };
 
   // Etiket ayarları
-  const LABEL_RADIUS_FACTOR = 0.52;
+  const LABEL_RADIUS_FACTOR = 0.52; // 0.50–0.55 güvenli
   const MAX_LABEL_LEN = 14;
   const FONT_SIZE = 13;
 
   return (
     <div className="wheel neon-shadow" ref={wheelRef} style={style}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`}>
         <defs>
           {/* Dilimler için dinamik gradientler */}
           {slices.map((s) => (

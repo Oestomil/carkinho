@@ -115,8 +115,23 @@ button.secondary{background:#2a334f;border-color:#35406a}
 
 input[type="range"]{width:100%}
 
-.wheelPanel{display:flex;flex-direction:column;align-items:center;justify-content:center}
-.wheelBox{position:relative;display:flex;align-items:center;justify-content:center;padding:12px}
+.wheelPanel{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow: visible;        /* işaretçi taşarsa görünür kalsın */
+}
+
+.wheelBox{
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px;
+  width: 100%;              /* panel enine yayıl */
+}
+
 .pointer{
   position:absolute;top:6px;left:50%;transform:translateX(-50%);
   width:0;height:0;z-index:2;
@@ -132,10 +147,15 @@ input[type="range"]{width:100%}
 }
 
 .wheel{
-  width:min(92vw,560px);
-  height:min(92vw,560px);
-  display:grid;place-items:center;border-radius:50%;
+  width: 100%;
+  max-width: 560px;        /* masaüstünde üst sınır */
+  aspect-ratio: 1 / 1;     /* kare tut */
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  height: auto;            /* sabit yükseklik yok */
 }
+
 
 .resultBox{margin-top:12px;min-height:48px;display:flex;align-items:center}
 .resultBox.pop{animation: pop-in .35s ease both}
