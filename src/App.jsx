@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Wheel from "./components/Wheel.jsx";
 import { PRESETS } from "./presets.js";
 import confetti from "canvas-confetti";
+import FlagSelect from "./components/FlagSelect.jsx";
+import 'flag-icons/css/flag-icons.min.css';
 
 const LS_KEYS = {
   ITEMS: "carkinho_items",
@@ -106,9 +108,9 @@ export default function App() {
     if (!canSpin) return;
 
     // Wheel'ı görünür alana kaydır
-    const wheelElement = document.querySelector('.wheelBox');
+    const wheelElement = document.querySelector(".wheelBox");
     if (wheelElement) {
-      wheelElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      wheelElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     setIsSpinning(true);
@@ -147,11 +149,79 @@ export default function App() {
       ? "Örnek: Ali, Ayşe, Mehmet, Zeynep… (her satır veya virgülle)"
       : "";
 
+  // ---- Bayraklı preset seçenekleri (SVG) ----
+  const presetOptions = [
+    // Premier League (GB)
+    {
+      value: "premier_2024_25_short",
+      label: "PL 24–25 (kısa)",
+      Flag: () => <span className="fi fi-gb-eng"></span>,
+    },
+    {
+      value: "premier_2025_26_short",
+      label: "PL 25–26 (kısa)",
+      Flag: () => <span className="fi fi-gb-eng"></span>,
+    },
+
+    // Süper Lig (TR)
+    {
+      value: "superlig_2024_25_short",
+      label: "Süper Lig 24–25",
+      Flag: () => <span className="fi fi-tr"></span>,
+    },
+    {
+      value: "superlig_2025_26_short",
+      label: "Süper Lig 25–26",
+      Flag: () => <span className="fi fi-tr"></span>,
+    },
+
+    // Bundesliga (DE)
+    {
+      value: "bundesliga_2024_25_short",
+      label: "Bundesliga 24–25",
+      Flag: () => <span className="fi fi-de"></span>,
+    },
+    {
+      value: "bundesliga_2025_26_short",
+      label: "Bundesliga 25–26",
+      Flag: () => <span className="fi fi-de"></span>,
+    },
+
+    // LaLiga (ES)
+    {
+      value: "laliga_2024_25_short",
+      label: "LaLiga 24–25",
+      Flag: () => <span className="fi fi-es"></span>,
+    },
+    {
+      value: "laliga_2025_26_short",
+      label: "LaLiga 25–26",
+      Flag: () => <span className="fi fi-es"></span>,
+    },
+
+    // Serie A (IT)
+    {
+      value: "seriea_2024_25_short",
+      label: "Serie A 24–25",
+      Flag: () => <span className="fi fi-it"></span>,
+    },
+    {
+      value: "seriea_2025_26_short",
+      label: "Serie A 25–26",
+      Flag: () => <span className="fi fi-it"></span>,
+    },
+
+    // Diğer
+    { value: "numbers1to10", label: "1–10 sayılar", Flag: null },
+  ];
+
   return (
     <div className="wrap fancy-bg">
       <header className="topbar">
-        <h1 className="logo-neon">Carkinho 🎡</h1>
-        <div className="subtitle">Adil & Eğlenceli Çarkıfelek</div>
+        <a href="https://carkinho.vercel.app" className="logo-link" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <h1 className="logo-neon">Carkinho 🎡</h1>
+          <div className="subtitle">Adil & Eğlenceli Çarkıfelek</div>
+        </a>
       </header>
 
       <main className="grid">
@@ -160,39 +230,14 @@ export default function App() {
           <h2 className="h2">Liste</h2>
           <div className="presetRow">
             <label>Hazır listeler:</label>
-            <select
-              onChange={(e) => {
-                if (e.target.value) loadPreset(e.target.value);
-                e.target.value = "";
-              }}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Liste seç…
-              </option>
 
-              {/* Premier League */}
-              <option value="premier_2024_25_short">⚽ PL 24–25 (kısa)</option>
-              <option value="premier_2025_26_short">⚽ PL 25–26 (kısa)</option>
+            {/* BAYRAKLI ÖZEL MENÜ */}
+            <FlagSelect
+              options={presetOptions}
+              placeholder="Liste seç…"
+              onChange={(val) => loadPreset(val)}
+            />
 
-              {/* Süper Lig */}
-              <option value="superlig_2024_25_short">🇹🇷 SL 24–25 (kısa)</option>
-              <option value="superlig_2025_26_short">🇹🇷 SL 25–26 (kısa)</option>
-
-              {/* Bundesliga */}
-              <option value="bundesliga_2024_25_short">🇩🇪 BUN 24–25</option>
-              <option value="bundesliga_2025_26_short">🇩🇪 BUN 25–26</option>
-
-              {/* LaLiga */}
-              <option value="laliga_2024_25_short">🇪🇸 LAL 24–25</option>
-              <option value="laliga_2025_26_short">🇪🇸 LAL 25–26</option>
-
-              {/* Serie A */}
-              <option value="seriea_2024_25_short">🇮🇹 SA 24–25</option>
-              <option value="seriea_2025_26_short">🇮🇹 SA 25–26</option>
-
-              <option value="numbers1to10">1–10 sayılar</option>
-            </select>
             <button className="ghost" onClick={clearAll}>
               Temizle
             </button>

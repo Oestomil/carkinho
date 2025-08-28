@@ -12,8 +12,10 @@
   "dependencies": {
     "@capacitor/android": "^7.4.3",
     "canvas-confetti": "^1.9.3",
+    "flag-icons": "^7.5.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "twemoji": "^14.0.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^7.4.3",
