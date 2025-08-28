@@ -1,0 +1,10 @@
+{
+  "appId": "com.carkinho.app",
+  "appName": "Carkinho",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "url": "https://carkinho.vercel.app",
+    "cleartext": true
+  }
+}
