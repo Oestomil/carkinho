@@ -104,6 +104,13 @@ export default function App() {
   // Çevir: rastgele bir açıya götür; kazananı dönüş bitince açıdan hesapla
   const spin = () => {
     if (!canSpin) return;
+
+    // Wheel'ı görünür alana kaydır
+    const wheelElement = document.querySelector('.wheelBox');
+    if (wheelElement) {
+      wheelElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     setIsSpinning(true);
     const spins = 6; // tam tur sayısı
     const randomExtra = Math.random() * 360;

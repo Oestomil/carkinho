@@ -143,18 +143,20 @@ export default function Wheel({
 
           {/* Orta kapak */}
           <circle cx={cx} cy={cy} r={40} fill="#0ea5e9" stroke="#93c5fd" strokeWidth="3" />
-          <text
-            x={cx}
-            y={cy}
-            fill="#06283b"
-            fontWeight="800"
-            fontSize="14"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="logo-center"
-          >
-            CARKINHO
-          </text>
+          <g transform={`rotate(${-rotation} ${cx} ${cy})`}>
+            <text
+              x={cx}
+              y={cy}
+              fill="#06283b"
+              fontWeight="800"
+              fontSize="14"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="logo-center"
+            >
+              CARKINHO
+            </text>
+          </g>
         </g>
       </svg>
     </div>

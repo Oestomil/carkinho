@@ -136,7 +136,7 @@ input[type="range"]{width:100%}
   position:absolute;top:6px;left:50%;transform:translateX(-50%);
   width:0;height:0;z-index:2;
   border-left:14px solid transparent;border-right:14px solid transparent;
-  border-bottom:22px solid #ffd166;
+  border-top:22px solid #ffd166;
   filter: drop-shadow(0 2px 2px rgba(0,0,0,.5));
 }
 .pointer.glow{
