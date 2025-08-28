@@ -12,6 +12,44 @@
   --panel-ring:#2a2f45;
 }
 
+/* Yukarı çık butonu stili */
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent);
+  color: white;
+  width: 48px; /* Mobilde daha büyük hedef alanı */
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  z-index: 9999; /* Her zaman en üstte */
+  opacity: 0.9;
+  -webkit-tap-highlight-color: transparent; /* Mobilde dokunma efektini kaldır */
+}
+
+.scroll-to-top-button:hover,
+.scroll-to-top-button:active {
+  transform: translateY(-2px);
+  opacity: 1;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top-button {
+    bottom: 24px;
+    right: 16px;
+    padding: 0; /* iOS'ta padding sorununu çöz */
+  }
+}
+
 *{box-sizing:border-box}
 html,body,#root{height:100%}
 body{

@@ -3,12 +3,13 @@ import Wheel from "./components/Wheel.jsx";
 import { PRESETS } from "./presets.js";
 import confetti from "canvas-confetti";
 import FlagSelect from "./components/FlagSelect.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import 'flag-icons/css/flag-icons.min.css';
 
 const LS_KEYS = {
   ITEMS: "carkinho_items",
   DURATION: "carkinho_duration",
-  REMOVE_WINNER: "carkinho_remove_winner",
+  REMOVE_WINNER: "carkinho_remove_winner"
 };
 
 // Tepenin işaret ettiği açıdan kazananı bul
@@ -107,11 +108,20 @@ export default function App() {
   const spin = () => {
     if (!canSpin) return;
 
-    // Wheel'ı görünür alana kaydır
-    const wheelElement = document.querySelector(".wheelBox");
-    if (wheelElement) {
-      wheelElement.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    // Wheel'ı görünür alana kaydır (mobil için geliştirilmiş versiyon)
+    setTimeout(() => {
+      const wheelElement = document.querySelector(".wheelBox");
+      if (wheelElement) {
+        // Önce smooth scroll dene
+        wheelElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        
+        // Backup olarak direkt pozisyona git
+        setTimeout(() => {
+          const yOffset = wheelElement.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight - wheelElement.offsetHeight) / 2;
+          window.scrollTo({ top: yOffset, behavior: 'smooth' });
+        }, 100);
+      }
+    }, 0);
 
     setIsSpinning(true);
     const spins = 6; // tam tur sayısı
@@ -329,22 +339,12 @@ export default function App() {
         </section>
       </main>
 
-      {/* Mobil alt çubuk (≤768px görünür) */}
-      <div className="mobile-cta">
-        <button className="btn-cta" onClick={spin} disabled={!canSpin}>
-          Çevir
-        </button>
-        {winnerName && (
-          <button className="secondary" onClick={repeat}>
-            Tekrarla
-          </button>
-        )}
-      </div>
+      <ScrollToTop />
 
       <footer className="footer">
         <span>
           © {new Date().getFullYear()} Carkinho —{" "}
-          <em>“şansın döndüğü yer”</em>
+          <em>"şansın döndüğü yer"</em>
         </span>
       </footer>
     </div>
