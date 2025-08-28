@@ -108,18 +108,28 @@ export default function App() {
   const spin = () => {
     if (!canSpin) return;
 
-    // Wheel'ı görünür alana kaydır (mobil için geliştirilmiş versiyon)
+    // Wheel'ı görünür alana kaydır
     setTimeout(() => {
       const wheelElement = document.querySelector(".wheelBox");
-      if (wheelElement) {
-        // Önce smooth scroll dene
-        wheelElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      const header = document.querySelector(".topbar");
+      
+      if (wheelElement && header) {
+        // Header yüksekliğini hesapla ve üstten boşluk bırak
+        const headerHeight = header.offsetHeight;
+        const offset = 20; // Extra üst boşluk
         
-        // Backup olarak direkt pozisyona git
-        setTimeout(() => {
-          const yOffset = wheelElement.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight - wheelElement.offsetHeight) / 2;
-          window.scrollTo({ top: yOffset, behavior: 'smooth' });
-        }, 100);
+        const wheelRect = wheelElement.getBoundingClientRect();
+        const targetY = wheelRect.top + window.pageYOffset - headerHeight - offset;
+
+        // Sayfayı düzgün pozisyona kaydır
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
+        
+        // Overflow'u düzelt
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
       }
     }, 0);
 

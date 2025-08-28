@@ -20,14 +20,17 @@ export default function ScrollToTop() {
   }, []);
 
   const scrollToTop = () => {
-    // Önce smooth scroll dene
+    // Body'nin scroll pozisyonunu kontrol et
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    // Scroll yap
     try {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     } catch (e) {
-      // Fallback: Direkt scroll
       window.scrollTo(0, 0);
     }
   };
